@@ -1,154 +1,130 @@
-Frontend Setup (React.js)
-Prerequisites:
-Node.js (v14 or higher)
-Steps:
-Change directory to the frontend folder:
+# Taskly - Task Management System
 
-bash
-Copy
-Edit
-cd frontend
-Install the frontend dependencies:
+## Objective
+Taskly is a full-stack web application for managing tasks. Users can register, log in, and manage their tasks effectively. The application follows modern web development standards and uses the following technologies:
 
-bash
-Copy
-Edit
-npm install
-Create a .env file in the frontend folder with the following:
+- **Backend**: Node.js and Express.js
+- **Database**: MongoDB
+- **Frontend**: React.js
 
-env
-Copy
-Edit
-REACT_APP_API_URL=http://localhost:5000
-Run the frontend application:
+---
 
-bash
-Copy
-Edit
-npm start
-The frontend should now be running at http://localhost:3000.
+## Features
+### User Management:
+- **Register**: Users can create an account.
+- **Login**: Users can log in securely.
+- **Password Security**: Passwords are hashed using bcrypt.
 
-API Endpoints
-Authentication:
-POST /api/users/register: Register a new user.
+### Task Management:
+- **Create Tasks**: Users can create tasks with a title, description, due date, and status (Pending, In Progress, Completed).
+- **View Tasks**: Users can view all their tasks.
+- **Update Tasks**: Users can update task details.
+- **Delete Tasks**: Users can delete their tasks.
 
-Request body:
+### Role-Based Access (Optional):
+- Admins can view tasks from all users.
 
-json
-Copy
-Edit
-{
-  "name": "User Name",
-  "email": "user@example.com",
-  "password": "password123"
-}
-Response:
+### Additional Features:
+- Responsive UI for mobile and desktop users.
+- Filter tasks by status or due date.
 
-json
-Copy
-Edit
-{ "message": "User registered successfully" }
-POST /api/users/login: Login a user and get a JWT token.
+---
 
-Request body:
+## Tech Stack
+- **Backend**: Node.js + Express.js
+- **Frontend**: React.js
+- **Database**: MongoDB
+- **Authentication**: JSON Web Tokens (JWT) + bcrypt for hashing passwords
+- **Styling**: Tailwind CSS (optional, customizable)
 
-json
-Copy
-Edit
-{
-  "email": "user@example.com",
-  "password": "password123"
-}
-Response:
+---
 
-json
-Copy
-Edit
-{ "token": "JWT_TOKEN" }
-Task Management:
-GET /api/tasks: Get all tasks for the logged-in user.
+## Project Structure
+```
+root
+├── backend
+│   ├── models
+│   │   ├── User.js
+│   │   └── Task.js
+│   ├── routes
+│   │   ├── authRoutes.js
+│   │   └── taskRoutes.js
+│   ├── controllers
+│   │   ├── authController.js
+│   │   └── taskController.js
+│   ├── middleware
+│   │   └── authMiddleware.js
+│   ├── config
+│   │   └── db.js
+│   ├── server.js
+│
+├── frontend
+│   ├── src
+│   │   ├── components
+│   │   │   ├── Login.js
+│   │   │   ├── Register.js
+│   │   │   ├── TaskDashboard.js
+│   │   │   ├── TaskForm.js
+│   │   │   └── TaskList.js
+│   │   ├── context
+│   │   │   └── AuthContext.js
+│   │   ├── services
+│   │   │   ├── authService.js
+│   │   │   └── taskService.js
+│   │   ├── App.js
+│   │   └── index.js
+```
 
-Headers: Authorization: Bearer <JWT_TOKEN>
-Response:
-json
-Copy
-Edit
-[
-  {
-    "title": "Task 1",
-    "description": "Description of Task 1",
-    "dueDate": "2025-01-30",
-    "status": "Pending",
-    "userId": "user_id"
-  },
-  ...
-]
-POST /api/tasks: Create a new task.
+---
 
-Request body:
+## Setup Instructions
 
-json
-Copy
-Edit
-{
-  "title": "New Task",
-  "description": "Task description",
-  "dueDate": "2025-01-30",
-  "status": "Pending"
-}
-Response:
+### Prerequisites
+- Node.js (v16 or higher)
+- MongoDB (running locally or through a service like MongoDB Atlas)
+- npm or yarn
 
-json
-Copy
-Edit
-{ "message": "Task created successfully" }
-PUT /api/tasks/:id: Update an existing task.
+### Backend Setup
+1. Navigate to the `backend` folder:
+   ```bash
+   cd backend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Configure environment variables:
+   - Create a `.env` file in the `backend` directory with the following variables:
+     ```env
+     MONGO_URI=<your_mongodb_connection_string>
+     JWT_SECRET=<your_jwt_secret>
+     PORT=5000
+     ```
+4. Start the backend server:
+   ```bash
+   npm start
+   ```
+   The backend API will run at `http://localhost:5000`.
 
-Request body:
-json
-Copy
-Edit
-{
-  "title": "Updated Task",
-  "description": "Updated description",
-  "dueDate": "2025-01-31",
-  "status": "In Progress"
-}
-DELETE /api/tasks/:id: Delete a task.
+### Frontend Setup
+1. Navigate to the `frontend` folder:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the React development server:
+   ```bash
+   npm start
+   ```
+   The frontend will run at `http://localhost:3000`.
 
-Response:
-json
-Copy
-Edit
-{ "message": "Task deleted successfully" }
-Frontend Structure
-Pages:
-Login Page: Allows users to log in using email and password.
-Register Page: Allows users to register by providing name, email, and password.
-Dashboard Page: Displays tasks for the logged-in user with options to create, update, delete, and filter tasks.
-Task Form Page: A form to create or edit tasks.
-Components:
-LoginForm: Handles user login form.
-RegisterForm: Handles user registration form.
-TaskList: Displays the list of tasks.
-TaskCard: Represents each task in a card.
-TaskForm: Handles creating and editing tasks.
-Services:
-AuthService: Handles user authentication logic (register, login, token management).
-TaskService: Manages API calls related to task management (create, read, update, delete tasks).
-CRUD Operations for Tasks
-Create Task:
-The user can add a new task through the task form. The task is then sent to the backend using the POST /api/tasks API.
-Read Tasks:
-The user can view all their tasks in a list. The tasks are fetched from the backend using the GET /api/tasks API.
-Update Task:
-The user can update task details. After editing, the changes are sent to the backend using the PUT /api/tasks/:id API.
-Delete Task:
-The user can delete a task by clicking on a delete button. The task is deleted from the backend using the DELETE /api/tasks/:id API.
-Authentication Flow
-User Registration: Users sign up by providing their details. A hashed password is saved in the database.
-User Login: Users log in by providing their email and password. If the credentials match, a JWT token is generated and sent to the frontend.
-Authenticated Requests: The frontend sends the JWT token in the Authorization header for every API request to ensure the user is authenticated.
-Error Handling
-Frontend: All API errors are caught and displayed with appropriate messages to the user.
-Backend: Proper error handling for missing fields, invalid credentials, and database errors. Errors are sent with a status code and descriptive message.
+---
+
+## API Documentation
+
+### Authentication Endpoints
+- **Register**: `POST /api/auth/register`
+  - Request body: `{ "name": "John Doe
