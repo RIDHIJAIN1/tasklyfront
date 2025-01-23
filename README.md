@@ -84,32 +84,11 @@ root
 - MongoDB (running locally or through a service like MongoDB Atlas)
 - npm or yarn
 
-### Backend Setup
-1. Navigate to the `backend` folder:
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Configure environment variables:
-   - Create a `.env` file in the `backend` directory with the following variables:
-     ```env
-     MONGO_URI=<your_mongodb_connection_string>
-     JWT_SECRET=<your_jwt_secret>
-     PORT=5000
-     ```
-4. Start the backend server:
-   ```bash
-   npm start
-   ```
-   The backend API will run at `http://localhost:5000`.
 
 ### Frontend Setup
 1. Navigate to the `frontend` folder:
    ```bash
-   cd frontend
+   cd tasklyfront
    ```
 2. Install dependencies:
    ```bash
@@ -119,12 +98,60 @@ root
    ```bash
    npm start
    ```
-   The frontend will run at `http://localhost:3000`.
+   The frontend will run at `http://localhost:5300`.
 
 ---
 
-## API Documentation
 
-### Authentication Endpoints
-- **Register**: `POST /api/auth/register`
-  - Request body: `{ "name": "John Doe
+
+## Assumptions
+- Only logged-in users can manage their tasks.
+- Admin role is optional and used for viewing all user tasks.
+- Frontend communicates with the backend through Axios.
+
+---
+
+## Development Guidelines
+- Ensure RESTful API conventions.
+- Follow clean and modular coding practices.
+- Implement proper error handling and validation for user input.
+- Use React Context for authentication state management.
+
+---
+
+## Additional Notes
+- Customize styles using Tailwind CSS or other CSS frameworks.
+- Test the application thoroughly for edge cases.
+- Document additional configurations or decisions made during development in this README.
+
+---
+
+## Testing
+1. **Backend Tests**:
+   - Use tools like Postman or Thunder Client to test API endpoints.
+   - Write unit and integration tests for critical backend functionality using a testing library like Mocha or Jest.
+
+2. **Frontend Tests**:
+   - Test components with React Testing Library.
+   - Ensure the application is responsive on multiple devices and browsers.
+
+3. **Manual Testing**:
+   - Test the app end-to-end for common user flows like login, task creation, and deletion.
+
+---
+
+## Future Enhancements
+- Add user profile management.
+- Enable push notifications for task reminders.
+- Implement sorting and searching for tasks.
+- Add a dashboard with task analytics (e.g., pie chart for task status distribution).
+
+---
+
+## Authors
+(https://github.com/RIDHIJAIN1))
+
+---
+
+## License
+This project is licensed under the MIT License.
